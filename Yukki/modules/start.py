@@ -58,7 +58,7 @@ async def on_help(_, message: Message):
     send = await message.reply_text("Contact me in PM for help.", reply_markup=upl)
     await put_cleanmode(message.chat.id, send.message_id)
 
-@app.on_message(filters.command(["start"]) & filters.private & ~filters.edited)
+@app.on_message(filters.command(["afkstart"]) & filters.private & ~filters.edited)
 async def on_private_start(_, message: Message):
     if len(message.text.split()) > 1:
         name = message.text.split(None, 1)[1]
