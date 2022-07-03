@@ -20,7 +20,7 @@ from Yukki.database.cleanmode import cleanmode_off, cleanmode_on, is_cleanmode_o
 from Yukki.helpers import get_readable_time, put_cleanmode, settings_markup, RANDOM, HELP_TEXT
 
 
-@app.on_message(filters.command(["start", "settings"]) & filters.group & ~filters.edited)
+@app.on_message(filters.command(["afkstart", "afksettings"]) & filters.group & ~filters.edited)
 async def on_start(_, message: Message):
     bot_uptime = int(time.time() - boot)
     Uptime = get_readable_time(bot_uptime)
@@ -43,7 +43,7 @@ async def on_start(_, message: Message):
     await put_cleanmode(message.chat.id, send.message_id)
     
 
-@app.on_message(filters.command(["help"]) & filters.group & ~filters.edited)
+@app.on_message(filters.command(["afkhelp"]) & filters.group & ~filters.edited)
 async def on_help(_, message: Message):
     upl = InlineKeyboardMarkup(
         [
@@ -80,7 +80,7 @@ async def on_private_start(_, message: Message):
         image = random.choice(RANDOM)
         await message.reply_photo(image, caption=f"Hello! My name is {botname}.\n\nTo know more about me check help section by /help. Active since {Uptime}", reply_markup=upl)
 
-@app.on_message(filters.command(["help"]) & filters.private & ~filters.edited)
+@app.on_message(filters.command(["afkhelp"]) & filters.private & ~filters.edited)
 async def on_private_help(_, message: Message):
     return await message.reply_text(HELP_TEXT)
         
